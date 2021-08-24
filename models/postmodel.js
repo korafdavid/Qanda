@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const User = require("../models/userModel");
+//const User = require("../models/userModel");
+const { User } = require('../models/userModel').schema;
 var Schema = mongoose.Schema;
 
 var PostModelSchema = new Schema({
@@ -8,10 +9,14 @@ var PostModelSchema = new Schema({
         required: true
     },
     user: {
-        type: User,
+        type: Schema.Types.ObjectId,
+        ref: "user",
         required: true
     },
-    date: Date.now
+    date: {
+        type: Date,
+        default: Date(Date.now())
+    }
 });
 // Compile model from schema
 var postModel = mongoose.model('Post', PostModelSchema );

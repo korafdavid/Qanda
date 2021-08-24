@@ -25,7 +25,7 @@ router.post("/signUp", async (req, res) => {
             email: email.toLowerCase(),
             password: encryptedPassword
         });
-
+        console.log(req.body);
         const token = jwt.sign(
             { user_id: user._id, email },
             process.env.TOKEN_KEY,
@@ -33,7 +33,7 @@ router.post("/signUp", async (req, res) => {
         );
 
         user.token = token;
-
+        console.log(token);
     } catch (error) {
         console.error(error);
     }
@@ -66,6 +66,7 @@ router.post("/SignIn", async (req, res) => {
             }
         } else {
             const user = await User.findOne({ username: emailOrUsername });
+            console.log(user);
             if (user && (await bcrypt.compare(password, user.password))) {
                 // Create token
                 const token = jwt.sign(
@@ -76,14 +77,15 @@ router.post("/SignIn", async (req, res) => {
                     }
                 );
                 user.token = token;
+
                 res.status(200).json(user);
             } else {
                 res.status(400).send('wrong Password');
             }
         }
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 });
 
-exports.module = router;
+module.exports = router;
