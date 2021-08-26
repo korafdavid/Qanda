@@ -7,10 +7,12 @@ require('dotenv/config');
 const auth = require('./config/authorizarion');
 const postRoute = require('./routes/post');
 const authRoute = require('./routes/authenication');
+const resetPass = require('./routes/resetpassword');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/auth', authRoute);
+app.use('/reset', resetPass);
 app.use('/Posts', auth, postRoute);
 mongoose.connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true

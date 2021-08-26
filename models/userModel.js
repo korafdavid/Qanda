@@ -22,6 +22,11 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
+    resetpassword: {
+        type: String,
+        expires: 3600
+    },
+    
     token: {type: String}
 });
 // Compile model from schema
