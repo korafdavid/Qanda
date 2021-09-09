@@ -4,11 +4,11 @@ const crypto = require('crypto');
 const user = require('../models/userModel');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
-
+require('dotenv/config');
 var salt = crypto.randomBytes(128).toString('hex');
-encryptedsalt = await bcrypt.hash(salt, 10);
+
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'yahoo',
     auth: {
         user: process.env.EMAIL,
         pass: process.env.LOVER
@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 router.post('/', async (req, res) => {
     var email = req.body.email;
     const User = await user.findOne({ email });
+    encryptedsalt = await bcrypt.hash(salt, 10);
     if (User) {
         User.resetpassord = encryptedsalt;
         var mailOptions = {
@@ -29,12 +30,12 @@ router.post('/', async (req, res) => {
                 + salt + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         };
-        smtpTransport.sendMail(mailOptions, function (err) {
+        transporter.sendMail(mailOptions, function (err) {
             if (err) throw err;
         });
 
     } else {
-        res.status(403).send('User not Found');
+        res.status(404).send('User not Found');
     }
 
 });
@@ -48,7 +49,7 @@ router.patch('', async (req, res) => {
     if (!user.resetpassword) {
         res.status(403).send('invalid token or expired token');
     }
-
+    encryptedsalt = await bcrypt.hash(salt, 10);
     if (await bcrypt.compare(token, user.resetpassword)) {
 
         if (password == confirmpassword) {
