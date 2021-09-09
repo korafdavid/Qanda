@@ -11,11 +11,11 @@ const resetPass = require('./routes/resetpassword');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/auth', authRoute);
-app.use('/reset', resetPass);
-app.use('/Posts', auth, postRoute);
+app.use('/api/v1', authRoute);
+app.use('/api/v1/reset', resetPass);
+app.use('/api/v1/posts', auth, postRoute);
 mongoose.connect(process.env.DB_CONNECTION, {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }, () => { console.log('connected to DB'); });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
