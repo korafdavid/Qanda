@@ -18,6 +18,22 @@ var UserSchema = new Schema({
       type: String,
       unique: true
     },
+    following: {
+        type: Array,
+        default: []
+    },
+    followers: {
+        type: Array,
+        default: []
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    profilephoto: {
+        type: String,
+        default : null
+    },
     password: {
         type: String,
         required: true
@@ -26,7 +42,6 @@ var UserSchema = new Schema({
         type: String,
         expires: 3600
     },
-    
     token: {type: String}
 });
 // Compile model from schema
