@@ -4,7 +4,7 @@ const { User } = require('../models/userModel').schema;
 var Schema = mongoose.Schema;
 
 var PostModelSchema = new Schema({
-    content: {
+    text: {
         type: String,
         required: true
     },
@@ -13,6 +13,19 @@ var PostModelSchema = new Schema({
         ref: "user",
         required: true
     },
+    like:{
+        type: Array,
+        default: []
+    },
+    photo: {
+        type: String,
+        default: null
+    },
+    comment: {
+        type: Array,
+        default: []
+    },
+    prettydate: {type: String},
     date: {
         type: Date,
         default: Date(Date.now())
