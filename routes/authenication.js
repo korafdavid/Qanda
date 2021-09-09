@@ -31,8 +31,8 @@ router.post("/signUp", async (req, res) => {
             process.env.TOKEN_KEY,
             { expiresIn: "2h" },
         );
-
         user.token = token;
+        res.status(201).json(user);
         console.log(token);
     } catch (error) {
         console.error(error);
@@ -62,7 +62,7 @@ router.post("/SignIn", async (req, res) => {
                 user.token = token;
                 res.status(200).json(user);
             } else {
-                res.status(400).send('wrong Password');
+                res.status(403).send('wrong Password');
             }
         } else {
             const user = await User.findOne({ username: emailOrUsername });
@@ -86,6 +86,63 @@ router.post("/SignIn", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+});
+
+
+// FOLLOW AND UNFOLLOW USER
+router.patch('/:id/follow', async (req, res) => {
+    const id = req.params.id;
+    const userId = req.body.id;
+    if (userId != id) {
+        const user = await User.findbyId(id);
+        const currentUser = await User.findbyId(userId);
+        try {
+
+            if (currentUser.following.includes(id)) {
+                //UNFOLLOW
+                await user.UpdateOne(
+                    {
+                        $pull: {
+                            followers: userId,
+                        }
+                    }
+
+                )
+                await currentUser.UpdateOne(
+                    {
+                        $pull: {
+                            following: id,
+                        }
+                    }
+                )
+                res.status(200).send('user has been unfollowed');
+            } else {
+                //FOLLOW   
+                await user.UpdateOne(
+                    {
+                        $push: {
+                            followers: userId,
+                        }
+                    }
+
+                )
+                await currentUser.UpdateOne(
+                    {
+                        $push: {
+                            following: id,
+                        }
+                    }
+                )
+                res.status(200).send('your has been followed');
+            }
+        } catch (error) {
+            res.status(500).json({ err: error });
+        }
+
+    } else {
+        res.status(403).send('Can\'t follow yourself');
+    }
+
 });
 
 module.exports = router;
