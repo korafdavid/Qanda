@@ -72,7 +72,8 @@ Backend api for a question and answer app write in Node js and express js framew
     | delete post | DELETE | http://localhost:3000/api/v1/posts/postId |
     | edit post   | PATCH  | http://localhost:3000/api/v1/posts/postId |
     | like/unlike post | PATCH | http://localhost:3000/api/v1/posts/userId/like |
-    | COMMENT ON POST | 
+    | COMMENT ON POST | POST  |  http://localhost:3000/api/v1/postId/comment |
+    | DELETE A COMMENT | DELETE  | http://localhost:3000/api/v1/postId/comment |
 
 
 
