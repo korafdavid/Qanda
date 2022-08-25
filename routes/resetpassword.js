@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     service: 'yahoo',
     auth: {
         user: process.env.EMAIL,
-        pass: process.env.LOVER
+        pass: process.env.EMAILPASS
     }
 });
 
