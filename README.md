@@ -1,19 +1,103 @@
-# NODE JS BACKEND API FOR QUESTION AND ANSWER APP <QANDA>
+# Qanda app backend
 
- # END POINTS CREATED!!
+Backend api for a question and answer app write in Node js and express js framework. Database CRUD Operation and relationship on Mongodb atlas and Mongoose.
+
+
+## Project Structure
+ 
+ ```
+ Qanda
+ ┣ config
+ ┃ ┗ authorizarion.js
+ ┣ models
+ ┃ ┣ chatModel.js
+ ┃ ┣ postmodel.js
+ ┃ ┗ userModel.js
+ ┣ routes
+ ┃ ┣ authenication.js
+ ┃ ┣ post.js
+ ┃ ┗ resetpassword.js
+ ┣ .gitignore
+ ┣ index.js
+ ┣ package-lock.json
+ ┣ package.json
+ ┗ README.md
+ ```
+
+
+
+# Get Started
+
+ ```Javascript
+    node index.js
+ ```
+
+ ## END POINTS CREATED!!
   
  - MONGODB QUERY
- - AUTHENICATION
+ - TOKEN BASED AUTHENICATION
+     - Sign Up
+     - Sign In
+     
  - JWT TOKEN 
- - POST CREATION 
- - DELETE POST
- - EDIT POST
+- RECOVER PASSWORD
  - FOLLOW / UNFOLLOW USER
- - LIKE / UNLIKE POST
- - COMMENT / DELETE COMMENT ON POST
- - SEARCH USER
- - SEARCH POST
- - GET TIMELINE POSTS
- - GET ALL POSTS
- - GET USER POSTS
+ - POST  
+   - DELETE POST
+   - EDIT POST
+   - CREATE POST
+   - LIKE / UNLIKE POST
+   - COMMENT ON POST
+   - DELETE COMMENT ON POST
+   - GET TIMELINE POSTS / POST RECOMMENDATION ALOGRITHM
+   - GET ALL POSTS
+   - GET USER POSTS
+ - SEARCH 
+   - SEARCH POST
+   - SEARCH USER
  
+  
+
+
+
+          
+    | query  |Method |  endpoints  |
+    | ---     | --- | ---        |
+    |  signin  | POST | http://localhost:3000/api/v1/signIn |
+    | signUp   | POST | http://localhost:3000/api/v1/signUp | 
+    | resetpassword | POST | http://localhost:3000/api/v1/reset/ |
+    | resetpassword | PATCH | http://localhost:3000/api/v1/reset |
+    | follow/unfollow User | PATCH | http://localhost:3000/api/v1/userId/follow |
+    | create post | POST | http://localhost:3000/api/v1/posts/userId |
+    | delete post | DELETE | http://localhost:3000/api/v1/posts/postId |
+    | edit post   | PATCH  | http://localhost:3000/api/v1/posts/postId |
+    | like/unlike post | PATCH | http://localhost:3000/api/v1/posts/userId/like |
+    | COMMENT ON POST | 
+
+
+
+    ### Sample Post
+ ```javasript
+
+    {
+        text: "This is my first post",
+        user: {
+            firstName: "David",
+            lastName: "Okoroafor",
+            username: "korafdavid",
+            verified: false,
+        }, 
+        like: 0,
+        comment: 0,
+        date: "25 mins ago"
+    }
+
+ ```
+
+ ## Environment Variable
+
+ - DB_CONNECT
+ - TOKEN_KEY
+ - EMAIL
+ - EMAILPASS
+
