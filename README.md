@@ -2,6 +2,8 @@
 
 Backend api for a question and answer app write in Node js and express js framework. Database CRUD Operation and relationship on Mongodb atlas and Mongoose.
 
+ 
+
 
 ## Project Structure
  
@@ -74,6 +76,11 @@ Backend api for a question and answer app write in Node js and express js framew
     | like/unlike post | PATCH | http://localhost:3000/api/v1/posts/userId/like |
     | COMMENT ON POST | POST  |  http://localhost:3000/api/v1/postId/comment |
     | DELETE A COMMENT | DELETE  | http://localhost:3000/api/v1/postId/comment |
+    | VERIFY A USER  | PATCH | http://localhost:3000/api/v1/verifyUser/ |
+    | UPLOAD PROFILE IMAGE | POST | http://localhost:3000/api/v1/UploadProfileImage |
+    | GET USER | GET | http://localhost:3000/api/v1/getUser  |
+    | GET USER PROFILE IMAGE | GET | http://localhost:3000/api/v1/ProfileImage |
+    | EDIT USER PROFILE | PUT | http://localhost:3000/api/v1/editProfile |
 
 
 
@@ -95,6 +102,8 @@ Backend api for a question and answer app write in Node js and express js framew
 
  ```
 
+
+
  ## Environment Variable
 
  - DB_CONNECT
@@ -102,3 +111,17 @@ Backend api for a question and answer app write in Node js and express js framew
  - EMAIL
  - EMAILPASS
 
+  |      |       |
+  | ----- | ---- |
+  |DB_CONNECT | MONGODB |
+  |TOKEN_KEY  | JWK SECRET KEY |
+  | EMAIL   | EMAIL |
+  | EMAILPASS| EMAIL SECRET KEY |
+  | KEY_ID   | AWS S3 BUCKET KEY ID  |
+  | SECRET_KEY| AWS S3 BUCKET SECRET KEY |
+  |BUCKET_NAME| AWS S3 BUCKET NAME |
+
+
+ 
+
+    If you found repository helpful, don't forget to leave a star.
